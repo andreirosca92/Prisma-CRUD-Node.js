@@ -115,7 +115,30 @@ router.delete("/:id", async (req: Request, res: Response) => {
  * Users :id
  * The PUT Route.
  */
+router.put("/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+    const updatedUser = await prisma.user.update({
+      select:{
+        id: true,
+        name: true
+      },
+      where: {
+        id: String(id),
+      },
+      data: {
+        name: String(name),
+      },
+    });
 
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong",
+    });
+  }
+});
 
 module.exports = {
   Users: router,
