@@ -4,10 +4,9 @@ import prisma from "../client";
 const router = Router();
 
 /**
- * GET /
- * Post :id
+ * POST /
+ * Users 
  */
-
 router.post("/", async (req: Request, res: Response) => {
   const { name, email } = req.body;
   try {
@@ -40,6 +39,12 @@ router.post("/", async (req: Request, res: Response) => {
     });
   }
 });
+
+/**
+ * GET /
+ * Users 
+ * The GET Route.
+ */
 router.get("/", async (req: Request, res: Response) => {
   try {
     const users = await prisma.user.findMany({
@@ -58,6 +63,12 @@ router.get("/", async (req: Request, res: Response) => {
     });
   }
 });
+
+/**
+ * GET /
+ * Users :id
+ * The GET Route.
+ */
 router.get("/:id", async (req: Request, res: Response) => {
   const id = req.params.id
   try {
@@ -73,6 +84,12 @@ router.get("/:id", async (req: Request, res: Response) => {
     });
   }
 });
+
+/**
+ * DELETE /
+ * Users :id
+ * The DELETE Route.
+ */
 
 router.delete("/:id", async (req: Request, res: Response) => {
   try {
@@ -92,7 +109,12 @@ router.delete("/:id", async (req: Request, res: Response) => {
     });
   }
 });
-
+// Creating the PUT Route.
+/**
+ * PUT /
+ * Users :id
+ * The PUT Route.
+ */
 
 
 module.exports = {
